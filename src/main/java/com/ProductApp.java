@@ -58,9 +58,46 @@ public class ProductApp {
 
 				break;
 			case 2:
-				
+				System.out.println("Please enter the product to delete in db :");
+				System.out.println("Enter product id :");
+				productId = scanner.nextInt();
+
+				if (productDAO.isProductExists(productId)) {
+					System.out.println("Product  exists ,deleted -- " + productId);
+					result = productDAO.deleteProduct(productId);
+					if (result) {
+						System.out.println("Product deleted successfully");
+					} else {
+						System.out.println("Product not deleted successfully");
+
+					}
+				} else {
+
+				}
 				break;
 			case 3:
+				System.out.println("Please enter the product to update in db :");
+				System.out.println("Enter old product id :");
+				productId = scanner.nextInt();
+				System.out.println("Enter new product name :");
+				productName = scanner.next();
+				System.out.println("Enter new quantity on hand :");
+				quantityOnHand = scanner.nextInt();
+				System.out.println("Enter new price  :");
+				price = scanner.nextInt();
+
+				Product productUpdate = new Product(productId, productName, quantityOnHand, price);
+				if (productDAO.isProductExists(productId)) {
+					result = productDAO.updateProduct(productUpdate);
+					if (result) {
+						System.out.println("Product updated successfully");
+					} else {
+						System.out.println("Product not updated successfully");
+
+					}
+				} else {
+
+				}
 				break;
 			case 4:
 				products = productDAO.viewProducts();
